@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+    
+{% block body %}
+
+    {% include 'elements/navbar.html.twig' %}
+    
+<script type="text/javascript">
+    // Map appearance
+    var width="100%";         // width in pixels or percentage
+    var height="800";         // height in pixels
+    var latitude="43.116669";     // center latitude (decimal degrees)
+    var longitude="5.93333";    // center longitude (decimal degrees)
+    var zoom="5";             // initial zoom (between 3 and 18)
+</script>
+<script type="text/javascript" src="https://www.vesselfinder.com/aismap.js"></script>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+{% block footer %}
+    {{ parent() }}
+{% endblock %}
