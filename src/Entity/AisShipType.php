@@ -32,9 +32,13 @@ class AisShipType
     #[ORM\OneToMany(mappedBy: 'aisShipType', targetEntity: Navire::class)]
     private Collection $navires;
 
+    #[ORM\ManyToMany(targetEntity: Port::class, mappedBy: 'types')]
+    private Collection $portsCompatible;
+
     public function __construct()
     {
         $this->navires = new ArrayCollection();
+        $this->portsCompatible = new ArrayCollection();
     }
       
     public function getId(): ?int
@@ -91,6 +95,33 @@ class AisShipType
             if ($navire->getAisShipType() === $this) {
                 $navire->setAisShipType(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Port>
+     */
+    public function getPortsCompatible(): Collection
+    {
+        return $this->portsCompatible;
+    }
+
+    public function addPortsCompatible(Port $portsCompatible): static
+    {
+        if (!$this->portsCompatible->contains($portsCompatible)) {
+            $this->portsCompatible->add($portsCompatible);
+            $portsCompatible->addType($this);
+        }
+
+        return $this;
+    }
+
+    public function removePortsCompatible(Port $portsCompatible): static
+    {
+        if ($this->portsCompatible->removeElement($portsCompatible)) {
+            $portsCompatible->removeType($this);
         }
 
         return $this;
