@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AisShipTypeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name:'aisshiptype')]
@@ -27,6 +29,14 @@ class AisShipType
     #[ORM\Column(name: 'libelle', length: 60)]
     private ?string $libelle = null;
 
+    #[ORM\OneToMany(mappedBy: 'aisShipType', targetEntity: Navire::class)]
+    private Collection $navires;
+
+    public function __construct()
+    {
+        $this->navires = new ArrayCollection();
+    }
+      
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +62,36 @@ class AisShipType
     public function setLibelle(string $libelle): static
     {
         $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Navire>
+     */
+    public function getNavires(): Collection
+    {
+        return $this->navires;
+    }
+
+    public function addNavire(Navire $navire): static
+    {
+        if (!$this->navires->contains($navire)) {
+            $this->navires->add($navire);
+            $navire->setAisShipType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNavire(Navire $navire): static
+    {
+        if ($this->navires->removeElement($navire)) {
+            // set the owning side to null (unless already changed)
+            if ($navire->getAisShipType() === $this) {
+                $navire->setAisShipType(null);
+            }
+        }
 
         return $this;
     }
