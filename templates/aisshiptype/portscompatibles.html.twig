@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ports compatibles{% endblock %}
+
+{% block body %}
+    <h1 style="text-align: center;">Ports Compatibles</h1>
+    <h3 style="text-align: center;">Type de navire : {{ aisShipType.id }} {{ aisShipType.libelle }}</h3>
+    
+    {% if aisShipType.getPortsCompatible() is not empty %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Indicatif</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Pays</th>
+                <th scope="col">Voir</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for port in aisShipType.getPortsCompatible() %}
+                <tr class="table-primary">
+                    <td>{{ port.indicatif }}</td>
+                    <td>{{ port.nom }}</td>
+                    <td>{{ port.getPays().nom }}</td>
+                    <td><a href="#">Voir</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <br>
+        <p style="color: red; text-align: center;">Aucun port disponible pour ce type de navire</p>
+    {% endif %}
+    
+{% endblock %}
