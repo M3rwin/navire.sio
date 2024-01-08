@@ -26,7 +26,7 @@
                         <td>{{ navire.aisshiptype.aisshiptype }}</td>
                         <td>{{ navire.getDestination().nom }}</td>
                         <td>{{ navire.getEta().format('Y-m-d H:i:s') }}</td>
-                        <td><a href="#" class="btn btn-primary">Editer</a></td>
+                        <td><a href="{{ path('navire_edit', {id: navire.id}) }}" class="btn btn-primary">Editer</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
