@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} Edit Navire ! {% endblock %}
+
+{% block body %}
+    <div class="container">
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-2" id="some-custom-id">
+                {{ form_label(form.imo, 'IMO') }}
+                {{ form_widget(form.imo, {'attr': {'placeholder': 'IMO Number', 'readonly':'true'}}) }}
+            </div>
+            
+            <div class="col-2" id="some-custom-id">
+                {{ form_label(form.nom, 'Nom du Navire') }}
+                {{ form_widget(form.nom, {'attr': {'placeholder': 'Saisir le nom du navire'}}) }}
+            </div>
+        </div>
+            
+            
+        <div class="row">
+            <div class="col-2" id="some-custom-id">
+                {{ form_label(form.mmsi, 'MMSI') }}
+                {{ form_widget(form.mmsi, {'attr': {'placeholder': 'MMSI Number'}}) }}
+            </div>
+            
+            <div class="col-2" id="some-custom-id">
+                {{ form_label(form.indicatif, 'Indicatif VHF') }}
+                {{ form_widget(form.indicatif, {'attr': {'placeholder': 'Saisir l\'indicatif du navire'}}) }}
+            </div>
+        </div>
+            
+        
+        <div class="row">
+            <div class="col-2" id="some-custom-id">
+                {{ form_label(form.longueur, 'Longueur') }}
+                {{ form_widget(form.longueur, {'attr': {'placeholder': 'Longueur du navire', 'type': 'number'}}) }}
+            </div>
+            
+            <div class="col-2" id="some-custom-id">
+                {{ form_label(form.largeur, 'Largeur') }}
+                {{ form_widget(form.largeur, {'attr': {'placeholder': 'Largeur du navire', 'type': 'number'}}) }}
+            </div>
+            
+            <div class="col-2" id="some-custom-id">
+                {{ form_label(form.tirantdeau, 'Tiran d\'eau') }}
+                {{ form_widget(form.tirantdeau, {'attr': {'placeholder': 'Tiran d\'eau du navire'}}) }}
+            </div>
+        </div>
+            
+            
+        <div class="row">
+            <div class="col-2" id="some-custom-id">
+                {{ form_label(form.aisShipType, 'Type de navire') }}
+                {{ form_widget(form.aisShipType, {'attr': {'placeholder': 'Type du navire'}}) }}
+            </div>
+            
+            <div class="col-2" id="some-custom-id">
+                {{ form_label(form.pavillon, 'Pavillon') }}
+                {{ form_widget(form.pavillon, {'attr': {'placeholder': 'Pavillon du navire'}}) }}
+            </div>
+        </div>
+            
+            
+        <div class="row">
+            <div class="col-2" id="some-custom-id">
+                {{ form_label(form.destination, 'Destination') }}
+                {{ form_widget(form.destination, {'attr': {'placeholder': 'Destination'}}) }}
+            </div>
+            
+            <div class="col-2" id="some-custom-id">
+                {{ form_label(form.eta, 'Estimed Time Arrival') }}
+                {{ form_widget(form.eta, {'attr': {'placeholder': 'ETA'}}) }}
+            </div>
+        </div>
+        
+    </div>
+                <br>
+                <a type="button" class="btn btn-success" style="width: 100px;" href="{{ path('navire_voirtous') }}">Retour</a>
+                <button type="submit" style="width: 100px;" class='btn btn-success'>Modifier</button>
+        {{ form_end(form) }}
+        
+        <script type="text/javascript">
+    // Map appearance
+    var width="100%";         // width in pixels or percentage
+    var height="500";         // height in pixels
+    var latitude="0.00";      // center latitude (decimal degrees)
+    var longitude="0.00";     // center longitude (decimal degrees)
+    var zoom="3";             // initial zoom (between 3 and 18)
+    var names=false;          // always show ship names (defaults to false)
+
+    // Single ship tracking
+    var mmsi="{{ navire.mmsi }}";     // display latest position (by MMSI)
+    var imo="{{ navire.imo }}";       // display latest position (by IMO, overrides MMSI)
+    var show_track=false;             // display track line (last 24 hours)
+
+   
+</script>
+<script type="text/javascript" src="https://www.vesselfinder.com/aismap.js"></script>
+
+        
+{% endblock %}
