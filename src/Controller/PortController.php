@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\PortType;
+use App\Entity\Port;
 
 #[Route('/port', name: 'port_')]
 class PortController extends AbstractController
